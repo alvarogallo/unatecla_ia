@@ -1,16 +1,21 @@
 const express = require('express');
 const app = express();
 
-app.use(express.json()); // Para parsear JSON en las solicitudes
+app.use(express.json());
 
-
-// Endpoint para recibir preguntas
 app.get('/api/chat', (req, res) => {
-  // Aquí simplemente respondemos con "Hola mundo"
-  res.json({ respuesta: 'Hola mundo' });
+  // Puedes validar la pregunta aquí si quieres
+  res.json({ respuesta: 'Hola' });
 });
 
-// El servidor escucha en el puerto 3000
-app.listen(3000, () => {
-  console.log('Servidor corriendo en http://localhost:3000');
+// O si quieres permitir POST también
+app.post('/api/chat', (req, res) => {
+  const pregunta = req.body.pregunta || '';
+  // Aquí puedes hacer que solo responda si hace referencia a tu sitio
+  res.json({ respuesta: 'Hola' });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor en puerto ${PORT}`);
 });
